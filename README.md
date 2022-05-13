@@ -1,5 +1,5 @@
 # Vue 3 + Typescript + Vite + cesium
-据不完全统计，现有的很多都是按照[Cesium 官方的 webpack 教程](https://cesium.com/learn/cesiumjs-learn/cesiumjs-webpack/)（基本上使用vue3的都是搭配vuecli4.x）来开发的，很少使用vue3最优的vite工具开发实现，本demo项目使用Vue.js（v3.0）、Vite、Cesium.js进行开发，也方便学习和交流。
+据不完全统计，现有的很多都是按照[Cesium 官方的 webpack 教程](https://cesium.com/learn/cesiumjs-learn/cesiumjs-webpack/)（基本上使用vue3的都是搭配vuecli4.x）来开发的，很少使用vue3最优的vite工具开发实现，本demo项目使用Vue3.x、Vite2.x、Cesium.js进行开发，也方便学习和交流。
 
 这里用到的是vite 搭配[vite-plugin-cesium](https://github.com/nshen/vite-plugin-cesium)，能很好实现在vite使用cesium。
 
