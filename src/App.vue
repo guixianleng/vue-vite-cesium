@@ -1,5 +1,5 @@
 <template>
-  <cesium-map />
+  <router-view />
 </template>
 
 <script lang="ts" setup></script>

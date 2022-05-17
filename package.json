@@ -15,6 +15,7 @@
     "lint:all": "npm run lint:eslint && npm run lint:stylelint && npm run lint:prettier && npm run lint:lint-staged"
   },
   "dependencies": {
+    "@ant-design/icons-vue": "^6.1.0",
     "ant-design-vue": "^3.2.3",
     "axios": "^0.24.0",
     "cesium": "^1.93.0",

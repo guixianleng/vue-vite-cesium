@@ -1,7 +1,7 @@
 import useCesium from '/@/hooks/useCesium'
 const Cesium = useCesium()
 
-export default function use3DTitleSet(viewerName = 'cesium3DContainer') {
+export default function use3DTitleSet(viewerName: string) {
   const viewer = new Cesium.Viewer(viewerName, {
     terrainProvider: Cesium.createWorldTerrain(),
   })
@@ -12,5 +12,4 @@ export default function use3DTitleSet(viewerName = 'cesium3DContainer') {
 
   viewer.scene.primitives.add(titleSet)
   viewer.zoomTo(titleSet)
-  return viewer
 }

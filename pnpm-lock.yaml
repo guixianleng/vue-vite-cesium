@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@ant-design/icons-vue': ^6.1.0
   '@commitlint/cli': ^15.0.0
   '@commitlint/config-conventional': ^15.0.0
   '@types/node': ^17.0.32
@@ -47,6 +48,7 @@ specifiers:
   vue-tsc: ^0.29.8
 
 dependencies:
+  '@ant-design/icons-vue': registry.npmmirror.com/@ant-design/icons-vue/6.1.0_vue@3.2.33
   ant-design-vue: registry.npmmirror.com/ant-design-vue/3.2.3_vue@3.2.33
   axios: registry.npmmirror.com/axios/0.24.0
   cesium: registry.npmmirror.com/cesium/1.93.0

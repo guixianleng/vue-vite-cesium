@@ -40,12 +40,10 @@ export default function useCesiumMap(viewerName = 'cesium3DContainer', extendCon
   //   requestVertexNormals: true,
   // })
 
-  const terrainLayer = Cesium.createWorldTerrain()
-
-  viewer.scene.terrainProvider = terrainLayer
+  // viewer.scene.terrainProvider = terrainLayer
   viewer.scene.globe.enableLighting = true
   // 显示 fps
-  viewer.scene.debugShowFramesPerSecond = true
+  viewer.scene.debugShowFramesPerSecond = false
   viewer.imageryLayers.addImageryProvider(new Cesium.IonImageryProvider({ assetId: 3 }))
 
   viewer.camera.setView({
@@ -61,5 +59,6 @@ export default function useCesiumMap(viewerName = 'cesium3DContainer', extendCon
     },
   })
   viewer.clock.shouldAnimate = true
-  return viewer
+
+  window.CViewer = viewer
 }

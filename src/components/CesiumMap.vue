@@ -1,15 +1,15 @@
 <template>
-  <div id="cesium3DContainer" class="cesium-3d-container">
+  <div :id="idName" class="cesium-3d-container">
     <a-select class="map-select" v-model:value="demoValue" :options="mapTypes" @change="handleChange" />
+    <panel-menu v-model:visible="panelVisible" />
   </div>
 </template>
 
 <script lang="ts" setup>
-  import { onMounted, ref } from 'vue'
+  import { ref, computed, onMounted } from 'vue'
   import type { SelectProps } from 'ant-design-vue'
+
   import useCesiumMap from '/@/hooks/useCesiumMap'
-  import useSetOSMBuildings from '/@/hooks/demo/setOSMBuildings'
-  import use3DTitleSet from '/@/hooks/demo/3DTitleSet'
 
   const mapTypes = ref<SelectProps['options']>([
     {
@@ -17,30 +17,40 @@
       label: 'OSM Building',
     },
     {
-      value: 'title',
-      label: '3D Title',
+      value: 'tile',
+      label: '3D Tiles',
     },
   ])
 
-  const demoValue = ref<string>('')
-  let viewer = ref<ElRef>(null)
-
-  onMounted(async () => {
-    viewer = await useCesiumMap()
+  const emit = defineEmits(['onMapReady', 'select', 'update:modelValue'])
+  const props = defineProps({
+    modelValue: {
+      type: String,
+      default: 'osm',
+    },
+    useInitMap: {
+      type: Boolean,
+      default: true,
+    },
+    idName: {
+      type: String,
+      default: 'cesium3DContainer',
+    },
   })
 
+  onMounted(async () => {
+    props.useInitMap && (await useCesiumMap())
+    emit('onMapReady')
+  })
+
+  const demoValue = computed(() => {
+    return props.modelValue
+  })
+  const panelVisible = ref<boolean>(false)
+
   const handleChange = (value: string) => {
-    switch (value) {
-      case 'osm':
-        useSetOSMBuildings(viewer)
-        break
-      case 'title':
-        use3DTitleSet(viewer)
-        break
-      default:
-        useCesiumMap()
-        break
-    }
+    emit('select', value)
+    emit('update:modelValue', value)
   }
 </script>
 

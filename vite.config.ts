@@ -60,6 +60,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
           drop_console: VITE_DROP_CONSOLE,
         },
       },
+      minify: 'terser',
       brotliSize: false,
       chunkSizeWarningLimit: 2000,
     },
