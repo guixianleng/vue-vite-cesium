@@ -1,10 +1,16 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import tile from '/@/views/3d-tile.vue'
+import Base from '/@/views/base.vue'
 import osm from '/@/views/osm-building.vue'
+import tile from '/@/views/3d-tile.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
+    name: 'base',
+    component: Base,
+  },
+  {
+    path: '/osm',
     name: 'osm',
     component: osm,
   },

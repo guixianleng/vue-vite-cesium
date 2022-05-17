@@ -1,4 +1,6 @@
 import useCesium from '/@/hooks/useCesium'
+import useRemoveMeasure from '/@/hooks/removeTools'
+
 const Cesium = useCesium()
 
 /**
@@ -6,7 +8,11 @@ const Cesium = useCesium()
  * @param viewer 3d地图实例
  */
 export default function useMeasureLineSpace(viewer: ElRef) {
+  useRemoveMeasure(viewer, window.linePointArray)
   const _this: any = {}
+  // 取消双击事件-追踪该位置
+  viewer.cesiumWidget.screenSpaceEventHandler.removeInputAction(Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK)
+
   _this.handler = new Cesium.ScreenSpaceEventHandler(viewer.scene._imageryLayerCollection)
   const positions = <any>[]
   let poly = null
@@ -14,6 +20,7 @@ export default function useMeasureLineSpace(viewer: ElRef) {
   let cartesian: any = null
   const floatingPointArray = <any>[]
 
+  // 鼠标移动事件
   _this.handler.setInputAction(function (movement) {
     const ray = viewer.camera.getPickRay(movement.endPosition)
     cartesian = viewer.scene.globe.pick(ray, viewer.scene)
@@ -28,6 +35,7 @@ export default function useMeasureLineSpace(viewer: ElRef) {
     }
   }, Cesium.ScreenSpaceEventType.MOUSE_MOVE)
 
+  // 鼠标左键点击事件
   _this.handler.setInputAction(function (movement) {
     const ray = viewer.camera.getPickRay(movement.position)
     cartesian = viewer.scene.globe.pick(ray, viewer.scene)
@@ -58,8 +66,10 @@ export default function useMeasureLineSpace(viewer: ElRef) {
     })
 
     floatingPointArray.push(_this.floatingPoint)
+    window.linePointArray = floatingPointArray
   }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
 
+  // 鼠标右键点击事件
   _this.handler.setInputAction(function () {
     _this.handler.destroy() //关闭事件句柄
     positions.pop() //最后一个点无效
@@ -79,17 +89,13 @@ export default function useMeasureLineSpace(viewer: ElRef) {
         },
       }
       _this.positions = positions
-      _this._init()
-    }
-
-    _.prototype._init = function () {
-      const _self = _this
+      // 实时更新线的位置
       const _update = function () {
-        return _self.positions
+        return _this.positions
       }
-      //实时更新polyline.positions
-      this.options.polyline.positions = new Cesium.CallbackProperty(_update, false)
-      viewer.entities.add(this.options)
+      // 实时更新 polyline.positions
+      _this.options.polyline.positions = new Cesium.CallbackProperty(_update, false)
+      viewer.entities.add(_this.options)
     }
 
     return _

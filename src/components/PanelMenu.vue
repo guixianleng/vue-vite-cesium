@@ -37,7 +37,7 @@
     },
   ])
 
-  const emits = defineEmits(['update:visible', 'btnClick'])
+  const emits = defineEmits(['update:visible', 'on-click'])
 
   const props = defineProps({
     title: {
@@ -69,7 +69,7 @@
   }
 
   const clickHandler = (value: string) => {
-    emits('btnClick', value)
+    emits('on-click', value)
   }
 </script>
 <style scoped lang="less">
@@ -102,6 +102,7 @@
       color: #fff;
       display: flex;
       justify-content: space-between;
+      border-bottom: 1px solid steelblue;
       align-items: center;
       span {
         font-weight: bold;
@@ -121,7 +122,7 @@
         flex: 1;
         display: flex;
         flex-wrap: wrap;
-        margin-bottom: 10px;
+        margin: 10px 0;
       }
     }
     .bar-icon {

@@ -2,7 +2,7 @@ import useCesium from '/@/hooks/useCesium'
 const Cesium = useCesium()
 
 //测量空间面积
-export default function measureAreaSpace(viewer: ElRef) {
+export default function useMeasureAreaSpace(viewer: ElRef) {
   const _this: any = {}
   // 取消双击事件-追踪该位置
   viewer.cesiumWidget.screenSpaceEventHandler.removeInputAction(Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK)
@@ -151,17 +151,13 @@ export default function measureAreaSpace(viewer: ElRef) {
       }
 
       _this.hierarchy = { positions }
-      _this._init()
-    }
 
-    _.prototype._init = function () {
-      const _self = _this
       const _update = function () {
-        return _self.hierarchy
+        return _this.hierarchy
       }
       //实时更新polygon.hierarchy
-      this.options.polygon.hierarchy = new Cesium.CallbackProperty(_update, false)
-      viewer.entities.add(this.options)
+      _this.options.polygon.hierarchy = new Cesium.CallbackProperty(_update, false)
+      viewer.entities.add(_this.options)
     }
 
     return _

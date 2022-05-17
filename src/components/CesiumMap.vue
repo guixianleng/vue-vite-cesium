@@ -1,7 +1,6 @@
 <template>
   <div :id="idName" class="cesium-3d-container">
     <a-select class="map-select" v-model:value="demoValue" :options="mapTypes" @change="handleChange" />
-    <panel-menu v-model:visible="panelVisible" />
   </div>
 </template>
 
@@ -12,6 +11,10 @@
   import useCesiumMap from '/@/hooks/useCesiumMap'
 
   const mapTypes = ref<SelectProps['options']>([
+    {
+      value: 'base',
+      label: '3D map',
+    },
     {
       value: 'osm',
       label: 'OSM Building',
@@ -46,7 +49,6 @@
   const demoValue = computed(() => {
     return props.modelValue
   })
-  const panelVisible = ref<boolean>(false)
 
   const handleChange = (value: string) => {
     emit('select', value)

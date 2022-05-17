@@ -8,6 +8,7 @@ declare module '*.vue' {
   declare global {
     interface Window {
       CViewer: any
+      linePointArray: Array<any>
     }
   }
 }
