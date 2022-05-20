@@ -2,7 +2,7 @@ import useCesium from '/@/hooks/useCesium'
 const Cesium = useCesium()
 
 //测量空间面积
-export default function useMeasureAreaSpace(viewer: ElRef) {
+export default function useMeasureArea(viewer: ElRef) {
   const _this: any = {}
   // 取消双击事件-追踪该位置
   viewer.cesiumWidget.screenSpaceEventHandler.removeInputAction(Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK)

@@ -1,6 +1,4 @@
 import useCesium from '/@/hooks/useCesium'
-import useRemoveMeasure from '/@/hooks/removeTools'
-
 const Cesium = useCesium()
 
 /**
@@ -8,7 +6,6 @@ const Cesium = useCesium()
  * @param viewer 3d地图实例
  */
 export default function useMeasureLineSpace(viewer: ElRef) {
-  useRemoveMeasure(viewer, window.linePointArray)
   const _this: any = {}
   // 取消双击事件-追踪该位置
   viewer.cesiumWidget.screenSpaceEventHandler.removeInputAction(Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK)
@@ -66,7 +63,6 @@ export default function useMeasureLineSpace(viewer: ElRef) {
     })
 
     floatingPointArray.push(_this.floatingPoint)
-    window.linePointArray = floatingPointArray
   }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
 
   // 鼠标右键点击事件

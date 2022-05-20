@@ -7,12 +7,23 @@
         <close-outlined @click="toggle" class="close-btn" />
       </header>
       <div class="content">
-        <div class="content-wrap">
-          <a-space>
-            <a-button v-for="(item, index) in operates" size="small" :key="index" @click="clickHandler(item.value)">
-              {{ item.label }}
-            </a-button>
-          </a-space>
+        <div v-for="(btn, i) in operates" :key="i" class="content-item">
+          <header class="item-header">
+            {{ btn.label }}
+          </header>
+          <div class="content-wrap">
+            <a-space>
+              <a-button
+                v-for="(item, index) in btn.list"
+                size="small"
+                :type="currentValue === item.value ? 'primary' : ''"
+                :key="index"
+                @click="clickHandler(item.value)"
+              >
+                {{ item.label }}
+              </a-button>
+            </a-space>
+          </div>
         </div>
       </div>
     </div>
@@ -26,23 +37,53 @@
   import { ref, reactive, watchEffect, computed } from 'vue'
   import { CloseOutlined, LeftOutlined } from '@ant-design/icons-vue'
 
+  import useMeasureLineSpace from '/@/hooks/measure/line'
+  import useMeasureArea from '/@/hooks/measure/area'
+  import useDraw from '/@/hooks/draw'
+  import useRemoveTools from '/@/hooks/removeTools'
+
   const operates = reactive([
     {
-      label: '测距',
-      value: 'line',
+      label: '量测',
+      list: [
+        {
+          label: '线距',
+          value: 'line',
+        },
+        {
+          label: '面积',
+          value: 'area',
+        },
+      ],
     },
     {
-      label: '测面积',
-      value: 'area',
+      label: '绘制',
+      list: [
+        {
+          label: '点',
+          value: 'point',
+        },
+        {
+          label: '线',
+          value: 'polyline',
+        },
+        {
+          label: '面',
+          value: 'polygon',
+        },
+        {
+          label: '清除',
+          value: 'clear',
+        },
+      ],
     },
   ])
 
   const emits = defineEmits(['update:visible', 'on-click'])
-
   const props = defineProps({
     title: {
       type: String,
-      default: '菜单',
+      default: '菜单操作',
     },
     width: {
       type: String,
@@ -53,7 +94,10 @@
       default: false,
     },
   })
+
+  const { removeAllDraw } = useRemoveTools()
   const dialogVisible = ref<boolean>(false)
+  const currentValue = ref<string>('')
 
   watchEffect(() => {
     dialogVisible.value = props.visible
@@ -69,6 +113,26 @@
   }
 
   const clickHandler = (value: string) => {
+    currentValue.value = value
+    switch (value) {
+      case 'line':
+        useMeasureLineSpace(window.CViewer)
+        break
+      case 'area':
+        useMeasureArea(window.CViewer)
+        break
+      case 'point':
+      case 'polyline':
+      case 'polygon':
+        useDraw(window.CViewer, value)
+        break
+      case 'clear':
+        removeAllDraw(window.CViewer)
+        currentValue.value = ''
+        break
+      default:
+        break
+    }
     emits('on-click', value)
   }
 </script>
@@ -117,12 +181,25 @@
       display: flex;
       flex-direction: column;
       padding: 0 10px;
-      overflow: auto;
       &-wrap {
         flex: 1;
         display: flex;
-        flex-wrap: wrap;
-        margin: 10px 0;
+        margin: 5px 0 10px;
+        .ant-space {
+          flex-wrap: wrap;
+        }
+      }
+      &-item {
+        border-bottom: 1px solid steelblue;
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+      .item-header {
+        text-align: left;
+        font-size: 13px;
+        color: #fff;
+        margin-top: 5px;
       }
     }
     .bar-icon {

@@ -2,9 +2,10 @@ import useCesium from '/@/hooks/useCesium'
 const Cesium = useCesium()
 
 export default function useSetOSMBuildings(viewer: ElRef) {
-  // const viewer = new Cesium.Viewer(viewerName, {
+  // const viewer = new Cesium.Viewer('cesium3DContainer', {
   //   terrainProvider: Cesium.createWorldTerrain(),
   // })
+  if (!viewer) return false
 
   viewer.scene.primitives.add(Cesium.createOsmBuildings())
 

@@ -1,5 +1,5 @@
 <template>
-  <div :id="idName" class="cesium-3d-container">
+  <div id="cesium3DContainer" class="cesium-3d-container">
     <a-select class="map-select" v-model:value="demoValue" :options="mapTypes" @change="handleChange" />
   </div>
 </template>
@@ -25,7 +25,7 @@
     },
   ])
 
-  const emit = defineEmits(['onMapReady', 'select', 'update:modelValue'])
+  const emit = defineEmits(['mapReady', 'select', 'update:modelValue'])
   const props = defineProps({
     modelValue: {
       type: String,
@@ -35,15 +35,11 @@
       type: Boolean,
       default: true,
     },
-    idName: {
-      type: String,
-      default: 'cesium3DContainer',
-    },
   })
 
   onMounted(async () => {
     props.useInitMap && (await useCesiumMap())
-    emit('onMapReady')
+    emit('mapReady')
   })
 
   const demoValue = computed(() => {
