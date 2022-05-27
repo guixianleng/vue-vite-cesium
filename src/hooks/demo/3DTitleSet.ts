@@ -4,15 +4,23 @@ const Cesium = useCesium()
 /**
  * 加载倾斜摄影示例
  */
-export default function use3DTitleSet() {
-  const viewer = new Cesium.Viewer('cesium3DContainer', {
-    terrainProvider: Cesium.createWorldTerrain(),
-  })
+export default async function use3DTitleSet(viewer: ElRef) {
   const titleSet = new Cesium.Cesium3DTileset({
-    url: Cesium.IonResource.fromAssetId(40866),
+    url: Cesium.IonResource.fromAssetId(354759),
   })
 
   viewer.scene.primitives.add(titleSet)
-  viewer.zoomTo(titleSet)
-  return viewer
+
+  try {
+    await titleSet.readyPromise
+    await viewer.zoomTo(titleSet)
+
+    // Apply the default style if it exists
+    const extras = titleSet.asset.extras
+    if (Cesium.defined(extras) && Cesium.defined(extras.ion) && Cesium.defined(extras.ion.defaultStyle)) {
+      titleSet.style = new Cesium.Cesium3DTileStyle(extras.ion.defaultStyle)
+    }
+  } catch (error) {
+    console.log(error)
+  }
 }

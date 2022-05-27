@@ -10,7 +10,7 @@ const Cesium = useCesium()
 export default function useCesiumMap(viewerName = 'cesium3DContainer', extendConf?: any) {
   // 设置使用的token
   Cesium.Ion.defaultAccessToken =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlYTdjZjg3Ny1hNmIyLTRiNjAtYmU4YS0wYWNhNTY0Mjk1ODMiLCJpZCI6OTMyNzEsImlhdCI6MTY1MjI0MDA4Nn0.GJWD80AG6ak6qyiLkWEcJfpHboB0GD6JLe6bWBvBlLc'
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJiZjgwM2VkMy0wOTQxLTRlMDQtOTA3NC02ZDJhNmFlYWI2M2MiLCJpZCI6OTMyNzEsImlhdCI6MTY1MzYxNTc3MX0.PZXaawvZhCgcahjwZFrmfXRtzvgF5_Vq7S1RtHO0sE8'
 
   // 设置查看的默认矩形（当前设置在中国）
   Cesium.Camera.DEFAULT_VIEW_RECTANGLE = Cesium.Rectangle.fromDegrees(80, 22, 130, 50)
@@ -35,7 +35,13 @@ export default function useCesiumMap(viewerName = 'cesium3DContainer', extendCon
     scene3DOnly: false, //每个几何实例将只能以3D渲染以节省GPU内存
     sceneMode: 3, //初始场景模式 1 2D模式 2 2D循环模式 3 3D模式  Cesium.SceneMode
   }
-  const viewer = new Cesium.Viewer(viewerName, { ...baseConf, ...extendConf })
+  const viewer = new Cesium.Viewer(viewerName, {
+    ...baseConf,
+    ...extendConf,
+    // imageryProvider: new Cesium.ArcGisMapServerImageryProvider({
+    //   url: 'http://map.geoq.cn/ArcGIS/rest/services/ChinaOnlineStreetPurplishBlue/MapServer',
+    // }),
+  })
   // 加载Cesium 官网的地形，亦可以加载自己的地形
   // const terrainLayer = new Cesium.CesiumTerrainProvider({
   //   url: Cesium.IonResource.fromAssetId(1),
