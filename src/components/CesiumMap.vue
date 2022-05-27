@@ -31,14 +31,10 @@
       type: String,
       default: 'osm',
     },
-    useInitMap: {
-      type: Boolean,
-      default: true,
-    },
   })
 
   onMounted(async () => {
-    props.useInitMap && (await useCesiumMap())
+    await useCesiumMap()
     emit('mapReady')
   })
 
@@ -54,8 +50,8 @@
 
 <style lang="less" scoped>
   .cesium-3d-container {
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     position: relative;
     .map-select {
       width: 150px;

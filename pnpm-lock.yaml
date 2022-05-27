@@ -4,6 +4,7 @@ specifiers:
   '@ant-design/icons-vue': ^6.1.0
   '@commitlint/cli': ^15.0.0
   '@commitlint/config-conventional': ^15.0.0
+  '@types/cesium': ^1.70.0
   '@types/node': ^17.0.32
   '@typescript-eslint/eslint-plugin': ^5.8.0
   '@typescript-eslint/parser': ^5.8.0
@@ -25,6 +26,7 @@ specifiers:
   husky: ^7.0.0
   less: ^4.1.2
   lint-staged: ^12.1.3
+  nprogress: ^0.2.0
   pinia: ^2.0.8
   postcss-html: ^1.3.0
   prettier: ^2.5.1
@@ -52,6 +54,7 @@ dependencies:
   ant-design-vue: registry.npmmirror.com/ant-design-vue/3.2.3_vue@3.2.33
   axios: registry.npmmirror.com/axios/0.24.0
   cesium: registry.npmmirror.com/cesium/1.93.0
+  nprogress: registry.npmmirror.com/nprogress/0.2.0
   pinia: registry.npmmirror.com/pinia/2.0.14_ytvqwwdyss532bvoq2clv4ed5m
   vue: registry.npmmirror.com/vue/3.2.33
   vue-router: registry.npmmirror.com/vue-router/4.0.15_vue@3.2.33
@@ -59,6 +62,7 @@ dependencies:
 devDependencies:
   '@commitlint/cli': registry.npmmirror.com/@commitlint/cli/15.0.0
   '@commitlint/config-conventional': registry.npmmirror.com/@commitlint/config-conventional/15.0.0
+  '@types/cesium': registry.npmmirror.com/@types/cesium/1.70.0
   '@types/node': registry.npmmirror.com/@types/node/17.0.32
   '@typescript-eslint/eslint-plugin': registry.npmmirror.com/@typescript-eslint/eslint-plugin/5.23.0_c63nfttrfhylg3zmgcxfslaw44
   '@typescript-eslint/parser': registry.npmmirror.com/@typescript-eslint/parser/5.23.0_hcfsmds2fshutdssjqluwm76uu
@@ -1004,6 +1008,15 @@ packages:
     version: 1.0.2
     dev: true
     optional: true
+
+  registry.npmmirror.com/@types/cesium/1.70.0:
+    resolution: {integrity: sha512-awCNt8Exv6oT+GALMgorfLYw43H5/99ZdKpG4Ovtft7dKpaAPkLuqpD1AobSjjtJ7xaOKKTj5fzYj+JQnPuzAQ==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/cesium/-/cesium-1.70.0.tgz}
+    name: '@types/cesium'
+    version: 1.70.0
+    deprecated: This is a stub types definition. cesium provides its own type definitions, so you do not need this installed.
+    dependencies:
+      cesium: registry.npmmirror.com/cesium/1.93.0
+    dev: true
 
   registry.npmmirror.com/@types/estree/0.0.51:
     resolution: {integrity: sha512-CuPgU6f3eT/XgKKPqKd/gLZV1Xmvf1a2R5POBOGQa6uv82xpls89HU5zKeVoyR8XzHd1RGNOlQlvUe3CFkjWNQ==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/estree/-/estree-0.0.51.tgz}
@@ -1998,7 +2011,6 @@ packages:
     resolution: {integrity: sha512-y5+KkISn3+0MZxGj96mNaZc5LAfpiOs1fmZCInH2xHwYw43FaaRbvdSHXZs8OwJ5dZIlo/m1biMyOKr354L+UA==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/cesium/-/cesium-1.93.0.tgz}
     name: cesium
     version: 1.93.0
-    dev: false
 
   registry.npmmirror.com/chalk/1.1.3:
     resolution: {integrity: sha512-U3lRVLMSlsCfjqYPbLyVv11M9CPW4I728d6TCKMAOJueEeB9/8o+eSsMnxPJD+Q+K909sdESg7C+tIkoH6on1A==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/chalk/-/chalk-1.1.3.tgz}
@@ -5636,6 +5648,12 @@ packages:
     dependencies:
       path-key: registry.npmmirror.com/path-key/3.1.1
     dev: true
+
+  registry.npmmirror.com/nprogress/0.2.0:
+    resolution: {integrity: sha512-I19aIingLgR1fmhftnbWWO3dXc0hSxqHQHQb3H8m+K3TnEn/iSeTZZOyvKXWqQESMwuUVnatlCnZdLBZZt2VSA==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/nprogress/-/nprogress-0.2.0.tgz}
+    name: nprogress
+    version: 0.2.0
+    dev: false
 
   registry.npmmirror.com/nth-check/2.0.1:
     resolution: {integrity: sha512-it1vE95zF6dTT9lBsYbxvqh0Soy4SPowchj0UBGj/V6cTPnXXtQOPUbhZ6CmGzAD/rW22LQK6E96pcdJXk4A4w==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/nth-check/-/nth-check-2.0.1.tgz}

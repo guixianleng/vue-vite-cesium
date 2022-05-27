@@ -1,6 +1,9 @@
 import useCesium from '/@/hooks/useCesium'
 const Cesium = useCesium()
 
+import nProgress from 'nprogress'
+import { useAppStore } from '/@/store/modules/app'
+
 /**
  * 初始化 Cesium 地图
  * @param viewerName 地图类型
@@ -8,6 +11,8 @@ const Cesium = useCesium()
  * @returns 实例化的cesium viewer
  */
 export default function useCesiumMap(viewerName = 'cesium3DContainer', extendConf?: any) {
+  nProgress.start()
+
   // 设置使用的token
   Cesium.Ion.defaultAccessToken =
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJiZjgwM2VkMy0wOTQxLTRlMDQtOTA3NC02ZDJhNmFlYWI2M2MiLCJpZCI6OTMyNzEsImlhdCI6MTY1MzYxNTc3MX0.PZXaawvZhCgcahjwZFrmfXRtzvgF5_Vq7S1RtHO0sE8'
@@ -48,12 +53,13 @@ export default function useCesiumMap(viewerName = 'cesium3DContainer', extendCon
   //   requestWaterMask: true,
   //   requestVertexNormals: true,
   // })
-
   // viewer.scene.terrainProvider = terrainLayer
+
+  viewer.imageryLayers.addImageryProvider(new Cesium.IonImageryProvider({ assetId: 3 }))
+
   viewer.scene.globe.enableLighting = true
   // 显示 fps
   viewer.scene.debugShowFramesPerSecond = false
-  viewer.imageryLayers.addImageryProvider(new Cesium.IonImageryProvider({ assetId: 3 }))
 
   viewer.camera.setView({
     // Cesium的坐标是以地心为原点，一向指向南美洲，一向指向亚洲，一向指向北极州
@@ -70,4 +76,17 @@ export default function useCesiumMap(viewerName = 'cesium3DContainer', extendCon
   viewer.clock.shouldAnimate = true
 
   window.CViewer = viewer
+
+  const appStore = useAppStore()
+
+  const helper = new Cesium.EventHelper()
+  helper.add(viewer.scene.globe.tileLoadProgressEvent, (e) => {
+    if (e > 20 || e === 0) {
+      console.log('矢量切片加载完成时的回调')
+      nProgress.done()
+      appStore.setPageLoading(false)
+    } else {
+      console.log('地图资源加载中')
+    }
+  })
 }
