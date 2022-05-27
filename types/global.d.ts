@@ -5,3 +5,5 @@ declare global {
     CViewer: any
   }
 }
+
+declare type Recordable<T = any> = Record<string, T>

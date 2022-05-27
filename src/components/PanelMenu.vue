@@ -16,7 +16,7 @@
               <a-button
                 v-for="(item, index) in btn.list"
                 size="small"
-                :type="currentValue === item.value ? 'primary' : ''"
+                :type="currentValue === item.value ? 'primary' : 'default'"
                 :key="index"
                 @click="clickHandler(item.value)"
               >
