@@ -2985,6 +2985,11 @@
   "resolved" "https://registry.npmmirror.com/he/-/he-1.2.0.tgz"
   "version" "1.2.0"
 
+"heatmap.js@^2.0.5":
+  "integrity" "sha512-CG2gYFP5Cv9IQCXEg3ZRxnJDyAilhWnQlAuHYGuWVzv6mFtQelS1bR9iN80IyDmFECbFPbg6I0LR5uAFHgCthw=="
+  "resolved" "https://registry.npmmirror.com/heatmap.js/-/heatmap.js-2.0.5.tgz"
+  "version" "2.0.5"
+
 "homedir-polyfill@^1.0.1":
   "integrity" "sha512-eSmmWE5bZTK2Nou4g0AI3zZ9rswp7GRKoKXS1BLUkvPviOqs4YTN1djQIqrXy9k5gEtdLPy86JjRwsNM9tnDcA=="
   "resolved" "https://registry.npmjs.org/homedir-polyfill/-/homedir-polyfill-1.0.3.tgz"

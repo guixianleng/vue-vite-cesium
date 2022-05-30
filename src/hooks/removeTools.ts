@@ -32,13 +32,13 @@ export default function useRemoveTools() {
    * 删除所有实体
    * @param viewer 3d地图实例
    */
-  const removeAllDraw = (viewer: ElRef) => {
+  const removeAllDraw = (viewer: ElRef, deleteType: Array<string> = ['点', '线', '面']) => {
     // viewer.entities.removeAll()
     const drawEntities = viewer.entities._entities._array
     const length = drawEntities.length
     // 倒叙遍历防止实体减少之后 不存在
     for (let f = length - 1; f >= 0; f--) {
-      if (drawEntities[f]._name && ['点', '线', '面'].includes(drawEntities[f]._name)) {
+      if (drawEntities[f]._name && deleteType.includes(drawEntities[f]._name)) {
         viewer.entities.remove(drawEntities[f])
       }
     }

@@ -2,7 +2,7 @@ import useCesium from '/@/hooks/useCesium'
 const Cesium = useCesium()
 
 import nProgress from 'nprogress'
-import { useAppStore } from '/@/store/modules/app'
+// import { useAppStore } from '/@/store/modules/app'
 
 /**
  * 初始化 Cesium 地图
@@ -43,9 +43,11 @@ export default function useCesiumMap(viewerName = 'cesium3DContainer', extendCon
   const viewer = new Cesium.Viewer(viewerName, {
     ...baseConf,
     ...extendConf,
-    // imageryProvider: new Cesium.ArcGisMapServerImageryProvider({
-    //   url: 'http://map.geoq.cn/ArcGIS/rest/services/ChinaOnlineStreetPurplishBlue/MapServer',
-    // }),
+    imageryProvider: new Cesium.ArcGisMapServerImageryProvider({
+      url: 'http://map.geoq.cn/ArcGIS/rest/services/ChinaOnlineStreetPurplishBlue/MapServer',
+      // arcGIS三维地图
+      // url: 'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer',
+    }),
   })
   // 加载Cesium 官网的地形，亦可以加载自己的地形
   // const terrainLayer = new Cesium.CesiumTerrainProvider({
@@ -55,7 +57,7 @@ export default function useCesiumMap(viewerName = 'cesium3DContainer', extendCon
   // })
   // viewer.scene.terrainProvider = terrainLayer
 
-  viewer.imageryLayers.addImageryProvider(new Cesium.IonImageryProvider({ assetId: 3 }))
+  // viewer.imageryLayers.addImageryProvider(new Cesium.IonImageryProvider({ assetId: 3 }))
 
   viewer.scene.globe.enableLighting = true
   // 显示 fps
@@ -77,14 +79,14 @@ export default function useCesiumMap(viewerName = 'cesium3DContainer', extendCon
 
   window.CViewer = viewer
 
-  const appStore = useAppStore()
+  // const appStore = useAppStore()
 
   const helper = new Cesium.EventHelper()
   helper.add(viewer.scene.globe.tileLoadProgressEvent, (e) => {
     if (e > 20 || e === 0) {
       console.log('矢量切片加载完成时的回调')
       nProgress.done()
-      appStore.setPageLoading(false)
+      // appStore.setPageLoading(false)
     } else {
       console.log('地图资源加载中')
     }

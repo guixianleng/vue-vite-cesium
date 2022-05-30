@@ -1,6 +1,7 @@
 <template>
   <div id="cesium3DContainer" class="cesium-3d-container">
     <a-select class="map-select" v-model:value="demoValue" :options="mapTypes" @change="handleChange" />
+    <slot></slot>
   </div>
 </template>
 

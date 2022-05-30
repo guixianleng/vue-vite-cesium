@@ -41,6 +41,7 @@
   import useMeasureArea from '/@/hooks/measure/area'
   import useDraw from '/@/hooks/draw'
   import useRemoveTools from '/@/hooks/removeTools'
+  import useHeatMap from '/@/hooks/demo/heatMap'
 
   const operates = reactive([
     {
@@ -77,6 +78,19 @@
         },
       ],
     },
+    {
+      label: '图层',
+      list: [
+        {
+          label: '热力图',
+          value: 'heatmap',
+        },
+        {
+          label: '清空热力图',
+          value: 'clearHeatmap',
+        },
+      ],
+    },
   ])
 
   const emits = defineEmits(['update:visible', 'on-click'])
@@ -96,8 +110,11 @@
   })
 
   const { removeAllDraw } = useRemoveTools()
+  const { createRectangle, getRandomData, createHeatMap } = useHeatMap()
+
   const dialogVisible = ref<boolean>(false)
   const currentValue = ref<string>('')
+  const heatMap = ref<ElRef>(null)
 
   watchEffect(() => {
     dialogVisible.value = props.visible
@@ -129,6 +146,15 @@
       case 'clear':
         removeAllDraw(window.CViewer)
         currentValue.value = ''
+        break
+      case 'heatmap':
+        const coordinate = [80, 22, 130, 50]
+        const { max, data } = getRandomData(200)
+        heatMap.value = createHeatMap(max, data)
+        createRectangle(window.CViewer, coordinate, heatMap.value)
+        break
+      case 'clearHeatmap':
+        removeAllDraw(window.CViewer, ['热力图'])
         break
       default:
         break
