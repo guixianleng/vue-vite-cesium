@@ -1,4 +1,5 @@
 import useCesium from '/@/hooks/useCesium'
+
 const Cesium = useCesium()
 
 /**
@@ -69,6 +70,7 @@ export default function useMeasureLineSpace(viewer: ElRef) {
   _this.handler.setInputAction(function () {
     _this.handler.destroy() //关闭事件句柄
     positions.pop() //最后一个点无效
+    floatingPointArray.pop()
   }, Cesium.ScreenSpaceEventType.RIGHT_CLICK)
 
   const PolyLinePrimitive = (function () {

@@ -75,7 +75,7 @@ export default function useMeasureArea(viewer: ElRef) {
       label: {
         text: textArea,
         font: '18px sans-serif',
-        fillColor: Cesium.Color.BLUE,
+        fillColor: Cesium.Color.GOLD,
         style: Cesium.LabelStyle.FILL_AND_OUTLINE,
         outlineWidth: 2,
         verticalOrigin: Cesium.VerticalOrigin.BOTTOM,

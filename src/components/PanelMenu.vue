@@ -178,7 +178,7 @@
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    z-index: 100;
+    z-index: 100000;
     &.hide {
       right: -200px;
     }
