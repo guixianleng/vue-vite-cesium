@@ -44,9 +44,9 @@ export default function useCesiumMap(viewerName = 'cesium3DContainer', extendCon
     ...baseConf,
     ...extendConf,
     imageryProvider: new Cesium.ArcGisMapServerImageryProvider({
-      url: 'http://map.geoq.cn/ArcGIS/rest/services/ChinaOnlineStreetPurplishBlue/MapServer',
+      // url: 'http://map.geoq.cn/ArcGIS/rest/services/ChinaOnlineStreetPurplishBlue/MapServer',
       // arcGIS三维地图
-      // url: 'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer',
+      url: 'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer',
     }),
   })
   // 加载Cesium 官网的地形，亦可以加载自己的地形
