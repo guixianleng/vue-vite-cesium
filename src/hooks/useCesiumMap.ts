@@ -43,11 +43,11 @@ export default function useCesiumMap(viewerName = 'cesium3DContainer', extendCon
   const viewer = new Cesium.Viewer(viewerName, {
     ...baseConf,
     ...extendConf,
-    imageryProvider: new Cesium.ArcGisMapServerImageryProvider({
-      // url: 'http://map.geoq.cn/ArcGIS/rest/services/ChinaOnlineStreetPurplishBlue/MapServer',
-      // arcGIS三维地图
-      url: 'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer',
-    }),
+    // imageryProvider: new Cesium.ArcGisMapServerImageryProvider({
+    //   // url: 'http://map.geoq.cn/ArcGIS/rest/services/ChinaOnlineStreetPurplishBlue/MapServer',
+    //   // arcGIS三维地图
+    //   url: 'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer',
+    // }),
   })
   // 加载Cesium 官网的地形，亦可以加载自己的地形
   // const terrainLayer = new Cesium.CesiumTerrainProvider({
@@ -57,7 +57,7 @@ export default function useCesiumMap(viewerName = 'cesium3DContainer', extendCon
   // })
   // viewer.scene.terrainProvider = terrainLayer
 
-  // viewer.imageryLayers.addImageryProvider(new Cesium.IonImageryProvider({ assetId: 3 }))
+  viewer.imageryLayers.addImageryProvider(new Cesium.IonImageryProvider({ assetId: 3 }))
 
   viewer.scene.globe.enableLighting = true
   // 显示 fps
