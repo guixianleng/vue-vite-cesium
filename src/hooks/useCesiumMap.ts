@@ -84,11 +84,11 @@ export default function useCesiumMap(viewerName = 'cesium3DContainer', extendCon
   const helper = new Cesium.EventHelper()
   helper.add(viewer.scene.globe.tileLoadProgressEvent, (e) => {
     if (e > 20 || e === 0) {
-      console.log('矢量切片加载完成时的回调')
+      // console.log('矢量切片加载完成时的回调')
       nProgress.done()
       // appStore.setPageLoading(false)
     } else {
-      console.log('地图资源加载中')
+      // console.log('地图资源加载中')
     }
   })
 }

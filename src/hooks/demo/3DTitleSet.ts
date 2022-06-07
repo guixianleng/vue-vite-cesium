@@ -1,10 +1,10 @@
 import useCesium from '/@/hooks/useCesium'
-const Cesium = useCesium()
 
 /**
  * 加载倾斜摄影示例
  */
 export default async function use3DTitleSet(viewer: ElRef) {
+  const Cesium = useCesium()
   viewer.imageryLayers.addImageryProvider(new Cesium.IonImageryProvider({ assetId: 3 }))
 
   const titleSet = new Cesium.Cesium3DTileset({

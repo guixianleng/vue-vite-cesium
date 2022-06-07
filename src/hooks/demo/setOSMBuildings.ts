@@ -1,7 +1,7 @@
 import useCesium from '/@/hooks/useCesium'
-const Cesium = useCesium()
 
 export default function useSetOSMBuildings(viewer: ElRef) {
+  const Cesium = useCesium()
   viewer.imageryLayers.addImageryProvider(new Cesium.IonImageryProvider({ assetId: 3 }))
 
   viewer.scene.primitives.add(Cesium.createOsmBuildings())
