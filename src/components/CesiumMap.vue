@@ -1,13 +1,16 @@
 <template>
-  <div id="cesium3DContainer" class="cesium-3d-container">
-    <a-select class="map-select" v-model:value="demoValue" :options="mapTypes" @change="handleChange" />
-    <slot></slot>
-  </div>
+  <a-spin :spinning="spinning" size="large">
+    <div id="cesium3DContainer" class="cesium-3d-container">
+      <a-select class="map-select" v-model:value="demoValue" :options="mapTypes" @change="handleChange" />
+      <slot></slot>
+    </div>
+  </a-spin>
 </template>
 
 <script lang="ts" setup>
   import { ref, computed, onMounted } from 'vue'
   import type { SelectProps } from 'ant-design-vue'
+  import { useAppStore } from '/@/store/modules/app'
 
   import useCesiumMap from '/@/hooks/useCesiumMap'
 
@@ -33,6 +36,9 @@
       default: 'osm',
     },
   })
+
+  const appStore = useAppStore()
+  const spinning = computed(() => appStore.getPageLoading)
 
   onMounted(async () => {
     await useCesiumMap()
@@ -61,5 +67,9 @@
       left: 20px;
       z-index: 99;
     }
+  }
+  :deep(.ant-spin) {
+    max-height: 100% !important;
+    background-color: #fff;
   }
 </style>

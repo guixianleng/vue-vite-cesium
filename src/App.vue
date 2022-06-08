@@ -1,18 +1,10 @@
 <template>
   <a-config-provider>
-    <a-spin :spinning="spinning" tip="加载中..." size="large">
-      <router-view />
-    </a-spin>
+    <router-view />
   </a-config-provider>
 </template>
 
-<script lang="ts" setup>
-  import { computed } from 'vue'
-  import { useAppStore } from '/@/store/modules/app'
-
-  const appStore = useAppStore()
-  const spinning = computed(() => appStore.getPageLoading)
-</script>
+<script lang="ts" setup></script>
 
 <style lang="less">
   html,
@@ -29,10 +21,6 @@
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     height: 100%;
-    :deep(.ant-spin) {
-      max-height: 100% !important;
-      background-color: #fff;
-    }
   }
 
   ::-webkit-scrollbar {
@@ -54,7 +42,6 @@
   // =================================
   #nprogress {
     pointer-events: none;
-
     .bar {
       position: fixed;
       top: 0;

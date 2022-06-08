@@ -2,7 +2,7 @@ import useCesium from '/@/hooks/useCesium'
 const Cesium = useCesium()
 
 import nProgress from 'nprogress'
-// import { useAppStore } from '/@/store/modules/app'
+import { useAppStore } from '/@/store/modules/app'
 
 /**
  * 初始化 Cesium 地图
@@ -79,14 +79,14 @@ export default function useCesiumMap(viewerName = 'cesium3DContainer', extendCon
 
   window.CViewer = viewer
 
-  // const appStore = useAppStore()
+  const appStore = useAppStore()
 
   const helper = new Cesium.EventHelper()
   helper.add(viewer.scene.globe.tileLoadProgressEvent, (e) => {
     if (e > 20 || e === 0) {
       // console.log('矢量切片加载完成时的回调')
       nProgress.done()
-      // appStore.setPageLoading(false)
+      appStore.setPageLoading(false)
     } else {
       // console.log('地图资源加载中')
     }
