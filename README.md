@@ -46,3 +46,9 @@ export default defineConfig({
 
 
 ![preview](https://images.prismic.io/cesium/tutorials-3d-tiles-styling-showAllBuildings.jpg?auto=compress%2Cformat&w=1040)
+
+## 使用 Gitpod 打开
+
+在 Gitpod（适用于 GitHub 的免费在线开发环境）中打开项目，并立即开始编码.
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/guixianleng/vue-vite-cesium)
